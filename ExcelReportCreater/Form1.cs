@@ -96,7 +96,7 @@ namespace ExcelReportCreater
                 throw new Exception("Не удалось загрузить шаблон для экспорта " + TemplatePath + "\n" + ex.Message);
             }
             Excel.Worksheet ws = wb.Worksheets.get_Item(1) as Excel.Worksheet;
-            int startCells = 13;
+            int startCells = 12;
             for (int j = 0; j < grid.Columns.Count; ++j)
             {
                 (ws.Cells[startCells, j + 1] as Excel.Range).Value2 = grid.Columns[j].HeaderText;
@@ -104,20 +104,21 @@ namespace ExcelReportCreater
                 {
                     object Val = grid.Rows[i-startCells].Cells[j].Value;
                     if (Val != null)
-                        (ws.Cells[i + 2, j + 1] as Excel.Range).Value2 = Val.ToString();
+                        (ws.Cells[i + 1, j + 1] as Excel.Range).Value2 = Val.ToString();
                 }
             }
             ws.Columns.EntireColumn.AutoFit();
             Exl.ReferenceStyle = RefStyle;
             releaseObject(Exl as Object);
 
-                MessageBox.Show("File created !");
+                MessageBox.Show("Отчет 17 создан!");
             
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string MyConString = "Server=localhost;" + "Database=cpp_data;" + "Uid=admin;" + "Pwd=admin;";
+            //string MyConString = "Server=localhost;" + "Database=cpp_data;" + "Uid=admin;" + "Pwd=admin;";
+            string MyConString = textBox1.Text;
             MySqlConnection connection = new MySqlConnection(MyConString);
             MySqlCommand cmd;
             connection.Open();
@@ -129,11 +130,20 @@ namespace ExcelReportCreater
                 String date_end = "2015-07-03";
                 date_begin = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                 date_end = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-                String command_str=  "SELECT * FROM `cpp_data`.`dbm`";
-                       command_str += "where DATE_ADD(`dbm`.`DateTime`, INTERVAL 0 SECOND) > DATE_ADD(\"" + date_begin;
-                       command_str += "\", INTERVAL 0 SECOND)";
-                       command_str += "and DATE_ADD(`dbm`.`DateTime`, INTERVAL 0 SECOND) < DATE_ADD(\"" + date_end;
-                       command_str += "\", INTERVAL 86400 SECOND);";
+                String command_str=  "SELECT DATE_FORMAT( t1.DateTime, '%H:%i') as 'Время выхода в эфир', t1.filename as 'Наименование аудиоматериала (бренд )',";
+                command_str += "alias.aliace as 'Категория а/мат ( рекл/ нерекл.)',";       
+                command_str += "'' as 'Вид  заказных, промо, анонсных аудиоматериалов, наименование заказчика,№ и дата договора', ";
+                command_str += "SEC_TO_TIME(t2.DateTime - t1.DateTime) as 'Хронометраж',";
+                command_str += "'' as'Примечания' FROM `cpp_data`.`dbm` as t1 ";
+                command_str += "join `cpp_data`.`dbm` as t2 on ";
+                command_str += "( ( (t2.DateTime - t1.DateTime) <= DATE_ADD(t1.time2, INTERVAL 60 SECOND) ) and ( (t2.DateTime - t1.DateTime) > \"00:00:00\" ) and \"<\" = t1.n ";
+                command_str += "and \">\" = t2.n  and t1.filename = t2.filename and t1.more0 = t2.more0 ) ";
+                command_str += "join `cpp_data`.`aliases` as alias on alias.aliace = t1.type ";
+                command_str += "where t1.DateTime >= \"" + date_begin;;
+                command_str += "\" and t1.DateTime < DATE_ADD(\""  + date_end;
+                command_str += "\", INTERVAL 1 DAY)";
+                command_str += "order by t1.filename";
+
                 cmd.CommandText = command_str;
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
