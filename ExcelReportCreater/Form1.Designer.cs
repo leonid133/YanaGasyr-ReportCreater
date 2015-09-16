@@ -123,7 +123,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(444, 20);
             this.textBox1.TabIndex = 9;
-            this.textBox1.Text = "Server=localhost;Database=cpp_data;Uid=root;Pwd=123;\r\n";
+            this.textBox1.Text = "Server=localhost;Database=cpp_data;Uid=admin;Pwd=admin;charset=utf8;";
             // 
             // Form1
             // 
