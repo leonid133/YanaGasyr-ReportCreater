@@ -10,16 +10,62 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 
 namespace ExcelReportCreater
 {
+    
     public partial class Form1 : Form
     {
+        void SaveStringConnection(string connectionString)
+        {
+            string path_connectionfile = @"connection.txt";
+            try
+            {
+                // Create the file.
+                using (FileStream fs = File.Create(path_connectionfile))
+                {
+                    Byte[] info = new UTF8Encoding(true).GetBytes(connectionString);
+                    // Add some information to the file.
+                    fs.Write(info, 0, info.Length);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        
+        string ReadStringConnect()
+        {
+            string connectionString = "";
+            string path_connectionfile = @"connection.txt";
+            try
+            {
+                // Open the stream and read it back.
+                using (StreamReader sr = File.OpenText(path_connectionfile))
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                        connectionString = s;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                 Console.WriteLine(ex.ToString());
+            }
+            return connectionString;
+        }
+
         public Form1()
         {
             
                 InitializeComponent();
+                textBox1.Text = ReadStringConnect();
             
         }
 
@@ -164,6 +210,11 @@ namespace ExcelReportCreater
 
                 }
             }
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            SaveStringConnection( textBox1.Text );
         } 
     }
 }
