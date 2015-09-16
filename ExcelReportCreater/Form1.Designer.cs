@@ -69,7 +69,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(469, 225);
             this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.Visible = false;
             // 
             // button3
             // 
@@ -124,13 +123,13 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(444, 20);
             this.textBox1.TabIndex = 9;
-            this.textBox1.Text = "Server=localhost;Database=cpp_data;Uid=admin;Pwd=admin;\r\n";
+            this.textBox1.Text = "Server=localhost;Database=cpp_data;Uid=root;Pwd=123;\r\n";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 202);
+            this.ClientSize = new System.Drawing.Size(500, 413);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
