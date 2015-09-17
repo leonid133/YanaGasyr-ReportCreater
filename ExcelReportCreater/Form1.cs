@@ -148,11 +148,12 @@ namespace ExcelReportCreater
                 (ws.Cells[startCells, j + 1] as Excel.Range).Value2 = grid.Columns[j].HeaderText;
                 for (int i = startCells; i < grid.Rows.Count; ++i)
                 {
-                    object Val = grid.Rows[i-startCells].Cells[j].Value;
+                    object Val = " " + grid.Rows[i - startCells].Cells[j].Value;
                     if (Val != null)
                         (ws.Cells[i + 1, j + 1] as Excel.Range).Value2 = Val.ToString();
                     if (j == 0)
                     {
+                        /*
                         string endcell = "a";
                         Excel.Range chartRange;
                         endcell += i;
@@ -173,18 +174,12 @@ namespace ExcelReportCreater
                         endcell = "f" + i;
                         chartRange = ws.get_Range("a12", endcell);
                         chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic);
-                       
+                       */
                     }
                 }
                
-            }/*
-            Excel.Range chartRange;
-            string endcell = "f";
-            endcell += grid.Columns.Count;
-            chartRange = ws.get_Range("a12", endcell);
-            chartRange.BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic);
-            */
-            ws.Columns.EntireColumn.AutoFit();
+            }
+            //ws.Columns.EntireColumn.AutoFit();
             Exl.ReferenceStyle = RefStyle;
             releaseObject(Exl as Object);
 
@@ -207,7 +202,7 @@ namespace ExcelReportCreater
                 String date_end = "2015-07-03";
                 date_begin = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                 date_end = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-                String command_str = "SELECT DATE_FORMAT( t1.DateTime, '%H:%i') as 'Время выхода в эфир',  TRIM(TRAILING SUBSTRING_INDEX(t1.filename, '.', -1) FROM t1.filename) as 'Наименование аудиоматериала (бренд )',";
+                String command_str = "SELECT DATE_FORMAT( t1.DateTime, '%H:%i') as 'Время выхода в эфир', TRIM(TRAILING '.' FROM TRIM(TRAILING SUBSTRING_INDEX(t1.filename, '.', -1) FROM t1.filename) ) as 'Наименование аудиоматериала (бренд )',";
                 command_str += "alias.aliace as 'Категория а/мат ( рекл/ нерекл.)',";       
                 command_str += "'' as 'Вид  заказных, промо, анонсных аудиоматериалов, наименование заказчика,№ и дата договора', ";
                 command_str += "SEC_TO_TIME(t2.DateTime - t1.DateTime) as 'Хронометраж',";
@@ -218,8 +213,8 @@ namespace ExcelReportCreater
                 command_str += "join `cpp_data`.`aliases` as alias on alias.aliace = t1.type ";
                 command_str += "where t1.DateTime >= \"" + date_begin;;
                 command_str += "\" and t1.DateTime < DATE_ADD(\""  + date_end;
-                command_str += "\", INTERVAL 1 DAY)";
-                command_str += "order by t1.filename";
+                command_str += "\", INTERVAL 1 DAY) AND t1.type != 'ROTACIA' AND t1.type != 'ATM'";
+                command_str += "ORDER BY t1.filename, t1.DateTime";
 
                 cmd.CommandText = command_str;
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -230,7 +225,7 @@ namespace ExcelReportCreater
             }
             catch (Exception)
             {
-                MessageBox.Show("Didn't Connect");
+                MessageBox.Show("Что-то пошло не так");
             }
             finally
             {
