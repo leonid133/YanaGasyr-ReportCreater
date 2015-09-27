@@ -1,5 +1,4 @@
 c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\ResolveAssemblyReference.cache
-c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\ExcelReportCreater.Form1.resources
 c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\ExcelReportCreater.Properties.Resources.resources
 c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\GenerateResource.read.1.tlog
 c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\GenerateResource.write.1.tlog
@@ -7,3 +6,4 @@ c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelRepo
 c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\bin\Release\ExcelReportCreater.pdb
 c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\ExcelReportCreater.exe
 c:\users\user\documents\visual studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\ExcelReportCreater.pdb
+C:\Users\User\Documents\Visual Studio 2010\Projects\ExcelReportCreater\ExcelReportCreater\obj\x86\Release\ExcelReportCreater.Form_ReportCreater.resources
