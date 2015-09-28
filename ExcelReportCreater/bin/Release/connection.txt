@@ -1,0 +1,1 @@
+Server=localhost;Database=cpp_data;Uid=admin;Pwd=admin;charset=utf8;
