@@ -90,6 +90,7 @@
             this.button_Report18.TabIndex = 4;
             this.button_Report18.Text = "прил №18";
             this.button_Report18.UseVisualStyleBackColor = true;
+            this.button_Report18.Click += new System.EventHandler(this.button_Report18_Click);
             // 
             // button_Report19
             // 
@@ -109,16 +110,18 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 6;
             this.dateTimePicker1.Tag = "Дата От";
-            this.dateTimePicker1.Value = new System.DateTime(2015, 9, 14, 0, 0, 0, 0);
+            this.dateTimePicker1.Value = new System.DateTime(2015, 7, 2, 0, 0, 0, 0);
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dateTimePicker2.Location = new System.Drawing.Point(282, 81);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 8;
             this.dateTimePicker2.Tag = "Дата До";
+            this.dateTimePicker2.Value = new System.DateTime(2015, 7, 3, 0, 0, 0, 0);
             // 
             // textBox_ConnectString
             // 
