@@ -525,7 +525,7 @@ namespace ExcelReportCreater
                
                 command_str = "select _uniqprogname as 'Название программы', SEC_TO_TIME( sum( _sum_timetrack ) ) as 'Хронометраж', count( _uniqprogname ) AS 'Выходы' \n";
                 command_str += "from( select sum( _timetrack ) as _sum_timetrack, _progname as _uniqprogname from ( \n";
-                command_str += "SELECT `g`.`group` as `group_`, time_to_sec(t2.time2) as _timetrack, SUBSTRING_INDEX(`g`.locate, '\\\\', 1) as _progname \n";
+                command_str += "SELECT MIN(`g`.DateTime) as `group_`, time_to_sec(t2.time2) as _timetrack, SUBSTRING_INDEX(`g`.locate, '\\\\', 1) as _progname \n";
                 command_str += "FROM `cpp_data`.`dbm` `g` JOIN `cpp_data`.`dbm` AS t2 ON (((t2.DateTime - `g`.DateTime) <= DATE_ADD(`g`.time2, INTERVAL 60 SECOND)) \n";
                 command_str += "AND ((t2.DateTime - `g`.DateTime) > '00:00:00') AND '<' = `g`.n AND '>' = t2.n AND `g`.filename = t2.filename \n";
                 command_str += "AND `g`.more0 = t2.more0) AND t2.DateTime >= @prepare_date AND t2.DateTime < DATE_ADD(@prepare_date, INTERVAL 1 DAY)  AND t2.type != 'ROTACIA'  AND t2.type != 'ATM' \n";
@@ -600,7 +600,7 @@ namespace ExcelReportCreater
 
                 command_str2 = "select _uniqprogname as 'Название программы', SEC_TO_TIME( sum( _sum_timetrack ) ) as 'Хронометраж', count( _uniqprogname ) AS 'Выходы' \n";
                 command_str2 += "from( select sum( _timetrack ) as _sum_timetrack, _progname as _uniqprogname from ( \n";
-                command_str2 += "SELECT `g`.`group` as `group_`, time_to_sec(t2.time2) as _timetrack, SUBSTRING_INDEX(`g`.locate, '\\\\', 1) as _progname \n";
+                command_str2 += "SELECT MIN(`g`.DateTime) as `group_`, time_to_sec(t2.time2) as _timetrack, SUBSTRING_INDEX(`g`.locate, '\\\\', 1) as _progname \n";
                 command_str2 += "FROM `cpp_data`.`dbm` `g` JOIN `cpp_data`.`dbm` AS t2 ON (((t2.DateTime - `g`.DateTime) <= DATE_ADD(`g`.time2, INTERVAL 60 SECOND)) \n";
                 command_str2 += "AND ((t2.DateTime - `g`.DateTime) > '00:00:00') AND '<' = `g`.n AND '>' = t2.n AND `g`.filename = t2.filename \n";
                 command_str2 += "AND `g`.more0 = t2.more0) AND t2.DateTime >= @prepare_date AND t2.DateTime < DATE_ADD(@prepare_date, INTERVAL " + deltatime.ToString() + " DAY)  AND t2.type != 'ROTACIA'  AND t2.type != 'ATM' \n";
@@ -658,7 +658,7 @@ namespace ExcelReportCreater
 
                 command_str2 = "select _uniqprogname as 'Название программы', SEC_TO_TIME( sum( _sum_timetrack ) ) as 'Хронометраж', count( _uniqprogname ) AS 'Выходы' \n";
                 command_str2 += "from( select sum( _timetrack ) as _sum_timetrack, _progname as _uniqprogname from ( \n";
-                command_str2 += "SELECT `g`.`group` as `group_`, time_to_sec(t2.time2) as _timetrack, SUBSTRING_INDEX(`g`.locate, '\\\\', 1) as _progname \n";
+                command_str2 += "SELECT MIN(`g`.DateTime) as `group_`, time_to_sec(t2.time2) as _timetrack, SUBSTRING_INDEX(`g`.locate, '\\\\', 1) as _progname \n";
                 command_str2 += "FROM `cpp_data`.`dbm` `g` JOIN `cpp_data`.`dbm` AS t2 ON (((t2.DateTime - `g`.DateTime) <= DATE_ADD(`g`.time2, INTERVAL 60 SECOND)) \n";
                 command_str2 += "AND ((t2.DateTime - `g`.DateTime) > '00:00:00') AND '<' = `g`.n AND '>' = t2.n AND `g`.filename = t2.filename \n";
                 command_str2 += "AND `g`.more0 = t2.more0) AND t2.DateTime >= @prepare_date AND t2.DateTime < DATE_ADD(@prepare_date, INTERVAL " + deltatime.ToString() + " DAY)  AND t2.type != 'ROTACIA'  AND t2.type != 'ATM' \n";
